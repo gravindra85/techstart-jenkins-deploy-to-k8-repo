@@ -251,8 +251,8 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat9-maven-plugin</artifactId>
-				<version>2.3</version>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.tomcat</groupId>
