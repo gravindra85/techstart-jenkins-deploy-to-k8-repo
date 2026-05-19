@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<easybuggy-port>8080</easybuggy-port>
-		<!-- default properties (JDK 1.7 or earlier) -->
+		<!-- default properties (legacy defaults) -->
 		<jvm.args.perm.size>-XX:MaxPermSize=128m</jvm.args.perm.size>
 		<jvm.args.gc.log.path>-Xloggc:logs/gc.log</jvm.args.gc.log.path>
 		<jvm.args.print.heap.at.gc>-XX:+PrintHeapAtGC</jvm.args.print.heap.at.gc>
@@ -42,6 +42,22 @@
 				<jvm.args.perm.size>-XX:MaxMetaspaceSize=128m</jvm.args.perm.size>
 				<jvm.args.gc.log.path>-Xlog:gc*:logs/gc_%p_%t.log:time,level,tags:filecount=5,filesize=10M</jvm.args.gc.log.path>
 				<!-- TODO Remove these properties -->
+				<jvm.args.print.heap.at.gc>-Dummy=Dummy</jvm.args.print.heap.at.gc>
+				<jvm.args.print.gc.details>-Dummy=Dummy</jvm.args.print.gc.details>
+				<jvm.args.print.gc.date.stamps>-Dummy=Dummy</jvm.args.print.gc.date.stamps>
+				<jvm.args.gc.log.file.rotation>-Dummy=Dummy</jvm.args.gc.log.file.rotation>
+				<jvm.args.number.of.gc.log.files>-Dummy=Dummy</jvm.args.number.of.gc.log.files>
+				<jvm.args.gc.log.file.size>-Dummy=Dummy</jvm.args.gc.log.file.size>
+			</properties>
+		</profile>
+		<profile>
+			<id>JDK17-Switch</id>
+			<activation>
+				<jdk>17</jdk>
+			</activation>
+			<properties>
+				<jvm.args.perm.size>-XX:MaxMetaspaceSize=128m</jvm.args.perm.size>
+				<jvm.args.gc.log.path>-Xlog:gc*:logs/gc_%p_%t.log:time,level,tags:filecount=5,filesize=10M</jvm.args.gc.log.path>
 				<jvm.args.print.heap.at.gc>-Dummy=Dummy</jvm.args.print.heap.at.gc>
 				<jvm.args.print.gc.details>-Dummy=Dummy</jvm.args.print.gc.details>
 				<jvm.args.print.gc.date.stamps>-Dummy=Dummy</jvm.args.print.gc.date.stamps>
@@ -133,16 +149,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.10.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>17</release>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.1.1</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>enforce-java</id>
@@ -155,9 +170,8 @@
 									<version>[3.0.0,)</version>
 								</requireMavenVersion>
 								<requireJavaVersion>
-									<version>[1.6,)</version>
-									<message>[ERROR] OLD JDK [${java.version}] in use.
-										EasyBuggy requires JDK 1.6 or later</message>
+									<version>[17,)</version>
+									<message>[ERROR] OLD JDK [${java.version}] in use. EasyBuggy requires JDK 17 or later</message>
 								</requireJavaVersion>
 							</rules>
 						</configuration>
