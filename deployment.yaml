@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment3
+  name: myapp-deployment1
   labels:
     app: myapp
 spec:
@@ -18,7 +18,7 @@ spec:
       - name: ecr-key
       containers:
       - name: myapp
-        image: 590183770136.dkr.ecr.ap-south-1.amazonaws.com/myapptechstart:latest
+        image: 773160770272.dkr.ecr.us-east-1.amazonaws.com/devsecops/udemy-project:8
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
