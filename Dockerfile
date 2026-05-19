@@ -1,4 +1,4 @@
-FROM maven:4.0.0-amazoncorretto-21 AS builder
+FROM maven:3.9.6-amazoncorretto-21 AS builder
 COPY . /usr/src/easybuggy/
 WORKDIR /usr/src/easybuggy/
 RUN mvn -B package
